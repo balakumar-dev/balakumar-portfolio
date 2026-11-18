@@ -1,934 +1,418 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Balakumar Swamy Jadi — Senior Full Stack .NET Developer specializing in C#, ASP.NET Core, Angular, Azure and microservices.">
+  <meta name="theme-color" content="#1e3a8a">
   <title>Balakumar Swamy Jadi | Senior Full Stack .NET Developer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <style>
     :root {
-      --bg: #0d1117;
-      --bg-2: #161b22;
-      --bg-3: #21262d;
-      --border: #30363d;
-      --text-primary: #e6edf3;
-      --text-secondary: #8b949e;
-      --text-muted: #484f58;
-      --accent: #2563eb;
-      --accent-light: #3b82f6;
-      --accent-glow: rgba(37,99,235,0.15);
-      --tag-bg: #1c2a3a;
-      --tag-text: #58a6ff;
-      --green: #3fb950;
-      --font-body: 'Inter', system-ui, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --primary-light: #eff6ff;
+      --secondary: #0ea5e9;
+      --success: #059669;
+      --text: #1e293b;
+      --muted: #526176;
+      --surface: #ffffff;
+      --page: #f4f7fb;
+      --border: #e2e8f0;
+      --shadow: 0 5px 24px rgba(30, 64, 175, .07);
+      --shadow-hover: 0 12px 30px rgba(37, 99, 235, .13);
+      --radius: 16px;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 105px; }
     body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--text-primary);
-      line-height: 1.6;
-      min-height: 100vh;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--page);
+      line-height: 1.7;
     }
+    a { color: inherit; }
+    .container { width: min(1050px, calc(100% - 36px)); margin: 0 auto; padding: 34px 0; }
 
-    /* ── NAV ── */
+    .header {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      color: #fff;
+      padding: 54px 24px 46px;
+      border-radius: 20px;
+      margin-bottom: 22px;
+      background: linear-gradient(135deg, #172554 0%, #1d4ed8 58%, #0284c7 100%);
+      box-shadow: 0 12px 32px rgba(37, 99, 235, .2);
+    }
+    .header::before, .header::after {
+      content: ""; position: absolute; border-radius: 50%; pointer-events: none;
+      background: rgba(255,255,255,.07);
+    }
+    .header::before { width: 300px; height: 300px; top: -190px; right: -55px; }
+    .header::after { width: 230px; height: 230px; bottom: -175px; left: -65px; }
+    .header-content { position: relative; z-index: 1; }
+    .profile-photo {
+      width: 126px; height: 126px; margin: 0 auto 17px;
+      display: grid; place-items: center; border-radius: 50%;
+      border: 4px solid rgba(255,255,255,.92);
+      background: rgba(255,255,255,.16);
+      color: #fff; font-size: 35px; font-weight: 800; letter-spacing: 1px;
+      box-shadow: 0 8px 22px rgba(0,0,0,.2);
+    }
+    .header h1 { font-size: clamp(2rem, 5vw, 2.65rem); line-height: 1.2; font-weight: 800; letter-spacing: -.8px; }
+    .header .title { color: #bfdbfe; font-size: 1.13rem; font-weight: 600; margin: 9px 0 13px; }
+    .location {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 15px;
+      border-radius: 30px; border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.1); color: #eff6ff; font-size: .9rem;
+      margin-bottom: 23px;
+    }
+    .contact-info { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px 24px; }
+    .contact-info a {
+      display: inline-flex; align-items: center; gap: 8px; color: #fff;
+      text-decoration: none; font-size: .91rem; opacity: .94; transition: opacity .2s, color .2s;
+    }
+    .contact-info a:hover { opacity: 1; color: #bfdbfe; }
+
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(13,17,23,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      position: sticky; top: 12px; z-index: 50;
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 7px;
+      padding: 13px 16px; margin-bottom: 24px;
+      background: rgba(255,255,255,.94); backdrop-filter: blur(12px);
+      border: 1px solid var(--border); border-radius: 13px; box-shadow: var(--shadow);
     }
-
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    nav a {
+      color: var(--muted); text-decoration: none; font-weight: 600; font-size: .9rem;
+      padding: 7px 13px; border-radius: 8px; transition: background .2s, color .2s;
     }
-
-    .nav-logo {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      color: var(--accent-light);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 13.5px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color .2s;
-      font-weight: 500;
-    }
-
-    .nav-links a:hover { color: var(--text-primary); }
-
-    /* ── LAYOUT ── */
-    .page {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    nav a:hover, nav a:focus-visible { color: var(--primary-dark); background: var(--primary-light); outline: none; }
 
     section {
-      padding: 80px 0;
-      border-bottom: 1px solid var(--border);
+      background: var(--surface); padding: 36px 38px; margin-bottom: 24px;
+      border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+      scroll-margin-top: 100px;
+    }
+    .section-heading {
+      display: inline-flex; align-items: center; gap: 11px;
+      color: var(--text); font-size: 1.55rem; font-weight: 750;
+      margin-bottom: 25px; padding-bottom: 10px; border-bottom: 2px solid var(--primary-light);
+      position: relative;
+    }
+    .section-heading::after {
+      content: ""; position: absolute; left: 0; bottom: -2px;
+      width: 48px; height: 2px; background: var(--primary);
+    }
+    .section-heading i { color: var(--primary); font-size: 1.15rem; }
+    .summary { color: var(--muted); font-size: 1rem; line-height: 1.85; }
+    .summary + .summary { margin-top: 12px; }
+    .metric {
+      display: inline-block; padding: 1px 7px; border-radius: 5px;
+      color: var(--primary-dark); background: var(--primary-light); font-weight: 650;
     }
 
-    section:last-child { border-bottom: none; }
-
-    /* ── HERO ── */
-    #hero {
-      padding: 140px 0 80px;
-      border-bottom: 1px solid var(--border);
+    .experience-item { padding: 4px 0 28px; margin-bottom: 27px; border-bottom: 1px solid var(--border); }
+    .experience-item:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: 0; }
+    .job-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; flex-wrap: wrap; margin-bottom: 15px; }
+    .job-title { color: var(--primary-dark); font-size: 1.14rem; font-weight: 750; }
+    .company { color: var(--text); font-weight: 650; margin-top: 3px; }
+    .company span { color: var(--muted); font-weight: 400; font-size: .92rem; }
+    .job-date {
+      white-space: nowrap; color: var(--primary-dark); background: var(--primary-light);
+      border: 1px solid #dbeafe; border-radius: 30px; padding: 5px 13px;
+      font-size: .82rem; font-weight: 700;
     }
+    .responsibilities { color: var(--muted); }
+    .responsibilities p { margin: 8px 0 12px; }
+    .responsibilities h4 { display: flex; align-items: center; gap: 9px; color: var(--text); margin: 15px 0 7px; font-size: .97rem; }
+    .responsibilities h4 i { color: var(--primary); width: 17px; }
+    .responsibilities ul { list-style: none; }
+    .responsibilities li { position: relative; padding-left: 20px; margin: 7px 0; font-size: .94rem; }
+    .responsibilities li::before { content: "•"; position: absolute; left: 2px; color: var(--primary); font-weight: 800; }
 
-    .hero-layout {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .hero-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--accent-light);
-      margin-bottom: 16px;
-      letter-spacing: 0.08em;
-    }
-
-    .hero-name {
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 700;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
-    }
-
-    .hero-title {
-      font-size: 18px;
-      color: var(--text-secondary);
-      font-weight: 400;
-      margin-bottom: 24px;
-    }
-
-    .hero-summary {
-      font-size: 15px;
-      color: var(--text-secondary);
-      max-width: 620px;
-      line-height: 1.75;
-      margin-bottom: 32px;
-    }
-
-    .hero-contacts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-
-    .contact-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      padding: 6px 14px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      transition: border-color .2s, color .2s;
-    }
-
-    .contact-link:hover {
-      border-color: var(--accent-light);
-      color: var(--accent-light);
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 32px;
-    }
-
-    .stat {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--accent-light);
-      display: block;
-      line-height: 1;
-    }
-
-    .stat-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .hero-badge {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px 32px;
-      text-align: center;
-      min-width: 180px;
-    }
-
-    .badge-dot {
-      width: 10px;
-      height: 10px;
-      background: var(--green);
-      border-radius: 50%;
-      display: inline-block;
-      margin-bottom: 10px;
-      box-shadow: 0 0 8px var(--green);
-    }
-
-    .badge-status {
-      font-size: 12px;
-      color: var(--green);
-      font-weight: 600;
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .badge-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    /* ── SECTION TITLES ── */
-    .section-title {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 36px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      color: var(--text-primary);
-    }
-
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* ── EXPERIENCE ── */
-    .exp-list { display: flex; flex-direction: column; gap: 0; }
-
-    .exp-item {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 24px;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .exp-item:last-child { border-bottom: none; }
-
-    .exp-meta {
-      text-align: right;
-      padding-top: 2px;
-    }
-
-    .exp-period {
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .exp-company {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-top: 6px;
-    }
-
-    .exp-role {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: var(--text-primary);
-    }
-
-    .exp-desc {
-      font-size: 13.5px;
-      color: var(--text-secondary);
-      margin-bottom: 12px;
-      line-height: 1.65;
-    }
-
-    .exp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-
-    .tag {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      background: var(--tag-bg);
-      color: var(--tag-text);
-      padding: 3px 9px;
-      border-radius: 4px;
-      border: 1px solid rgba(88,166,255,0.15);
-    }
-
-    /* ── PROJECTS ── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
-    }
-
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(265px, 1fr)); gap: 18px; }
     .project-card {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 24px;
-      transition: border-color .2s, transform .2s;
+      display: flex; flex-direction: column; justify-content: space-between; gap: 15px;
+      padding: 23px; background: #f8fbff; border: 1px solid #dbeafe; border-radius: 13px;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
     }
-
-    .project-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
+    .project-card:hover { transform: translateY(-4px); border-color: #93c5fd; box-shadow: var(--shadow-hover); }
+    .project-card h3 { display: flex; align-items: flex-start; gap: 10px; color: var(--primary-dark); font-size: 1.05rem; line-height: 1.45; margin-bottom: 9px; }
+    .project-card h3 i { color: var(--primary); margin-top: 4px; }
+    .project-card p { color: var(--muted); font-size: .91rem; line-height: 1.7; }
+    .tech { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tech-badge {
+      color: #1e40af; background: #fff; border: 1px solid #dbeafe;
+      border-radius: 6px; padding: 4px 9px; font-size: .75rem; font-weight: 600;
     }
+    .project-meta { display: flex; justify-content: space-between; gap: 10px; border-top: 1px solid #e2e8f0; padding-top: 11px; color: #64748b; font-size: .77rem; }
 
-    .project-num {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--accent-light);
-      margin-bottom: 8px;
-      opacity: 0.7;
+    .ai-panel {
+      background: linear-gradient(135deg, #eff6ff, #f0f9ff);
+      border: 1px solid #bfdbfe; border-radius: 13px; padding: 23px; margin-bottom: 20px;
     }
+    .ai-panel h3 { display: flex; align-items: center; gap: 10px; color: var(--primary-dark); margin-bottom: 13px; font-size: 1.05rem; }
+    .ai-panel h3 i { color: var(--primary); }
+    .ai-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .ai-tag { color: #1d4ed8; background: #fff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 4px 10px; font-size: .8rem; font-weight: 600; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 17px; }
+    .skill-category { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .skill-category h3 { display: flex; align-items: center; gap: 9px; color: var(--text); font-size: .98rem; margin-bottom: 12px; }
+    .skill-category h3 i { color: var(--primary); }
+    .skill-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 7px 12px; }
+    .skill-list li { color: var(--muted); font-size: .86rem; display: flex; align-items: baseline; gap: 7px; }
+    .skill-list li::before { content: "✓"; color: var(--success); font-weight: 800; flex: 0 0 auto; }
 
-    .project-name {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: var(--text-primary);
-    }
+    .education-item { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding: 20px; border: 1px solid var(--border); border-radius: 12px; background: #f8fafc; }
+    .education-item h3 { font-size: 1.05rem; margin-bottom: 5px; }
+    .education-item .details { color: var(--muted); font-size: .92rem; }
 
-    .project-desc {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.65;
-      margin-bottom: 16px;
-    }
-
-    .project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
-
-    .project-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11.5px;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border);
-      padding-top: 12px;
-    }
-
-    /* ── SKILLS ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .skill-group {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px 22px;
-    }
-
-    .skill-group-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent-light);
-      margin-bottom: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      font-family: var(--font-mono);
-    }
-
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-
-    .skill-tag {
-      font-size: 12px;
-      background: var(--bg-3);
-      color: var(--text-secondary);
-      padding: 4px 10px;
-      border-radius: 5px;
-      border: 1px solid var(--border);
-    }
-
-    /* ── EDUCATION ── */
-    .edu-card {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 24px 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .edu-degree {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .edu-college {
-      font-size: 13.5px;
-      color: var(--text-secondary);
-      margin-bottom: 4px;
-    }
-
-    .edu-year {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .edu-cgpa {
-      font-family: var(--font-mono);
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--accent-light);
-      text-align: right;
-    }
-
-    .edu-cgpa span {
-      display: block;
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 400;
-      margin-top: 2px;
-    }
-
-    /* ── AI SECTION ── */
-    .ai-banner {
-      background: linear-gradient(135deg, var(--bg-2) 0%, #0f1e35 100%);
-      border: 1px solid rgba(37,99,235,0.3);
-      border-radius: 12px;
-      padding: 28px 32px;
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-    }
-
-    .ai-icon {
-      font-size: 28px;
-      flex-shrink: 0;
-    }
-
-    .ai-title {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: var(--text-primary);
-    }
-
-    .ai-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-
-    .ai-tag {
-      font-size: 11.5px;
-      background: rgba(37,99,235,0.15);
-      color: var(--accent-light);
-      padding: 3px 10px;
-      border-radius: 4px;
-      border: 1px solid rgba(37,99,235,0.3);
-      font-family: var(--font-mono);
-    }
-
-    /* ── FOOTER ── */
     footer {
-      text-align: center;
-      padding: 40px 24px;
-      font-size: 12.5px;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border);
+      text-align: center; background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 18px;
+      color: var(--muted); font-size: .88rem; margin-top: 6px;
     }
-
-    footer a {
-      color: var(--text-secondary);
-      text-decoration: none;
+    .social-links { display: flex; justify-content: center; gap: 12px; margin-bottom: 15px; }
+    .social-links a {
+      width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%;
+      color: var(--primary); background: var(--primary-light); border: 1px solid #dbeafe;
+      text-decoration: none; transition: .2s;
     }
+    .social-links a:hover { color: #fff; background: var(--primary); transform: translateY(-2px); }
+    footer a { color: var(--primary-dark); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .hero-layout { grid-template-columns: 1fr; }
-      .hero-badge { display: none; }
-      .exp-item { grid-template-columns: 1fr; }
-      .exp-meta { text-align: left; }
-      .nav-links { gap: 16px; }
+    @media (max-width: 700px) {
+      .container { width: min(100% - 24px, 1050px); padding: 12px 0 24px; }
+      .header { padding: 38px 17px 32px; border-radius: 15px; }
+      .profile-photo { width: 105px; height: 105px; font-size: 30px; }
+      .contact-info { flex-direction: column; align-items: center; gap: 9px; }
+      nav { top: 6px; justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; }
+      nav a { white-space: nowrap; font-size: .84rem; padding: 7px 10px; }
+      section { padding: 25px 20px; margin-bottom: 16px; }
+      .section-heading { font-size: 1.3rem; margin-bottom: 20px; }
+      .job-header { display: block; }
+      .job-date { display: inline-block; margin-top: 9px; }
+      .projects-grid, .skills-grid { grid-template-columns: 1fr; }
+      .skill-list { grid-template-columns: 1fr 1fr; }
+      .project-meta { flex-wrap: wrap; }
     }
-
-    @media (max-width: 540px) {
-      .nav-links { display: none; }
-      #hero { padding-top: 110px; }
+    @media (max-width: 380px) {
+      .skill-list { grid-template-columns: 1fr; }
+      .header h1 { font-size: 1.8rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="#hero" class="nav-logo">balakumar.dev</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#education">Education</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- HERO -->
-<div class="page">
-  <section id="hero" id="about">
-    <div class="hero-layout">
-      <div>
-        <div class="hero-eyebrow">// Senior Full Stack .NET Developer</div>
-        <h1 class="hero-name">Balakumar<br>Swamy Jadi</h1>
-        <p class="hero-title">7+ Years · .NET · Angular · Azure · Microservices</p>
-        <p class="hero-summary">
-          Senior Full Stack .NET Developer with expertise in C#, ASP.NET Core, Angular, and SQL Server.
-          Experienced designing enterprise-grade microservices, RESTful APIs, and cloud-native systems on Azure.
-          Hands-on with AI-assisted development including LLM integrations, RAG, and MCP.
-        </p>
-        <div class="hero-contacts">
-          <a class="contact-link" href="mailto:balakumarjadi@yahoo.com">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            balakumarjadi@yahoo.com
-          </a>
-          <a class="contact-link" href="tel:+916281355510">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 12 19.79 19.79 0 0 1 1.07 3.37a2 2 0 0 1 1.98-2.18H6a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            +91-6281355510
-          </a>
-          <a class="contact-link" href="https://linkedin.com/in/balakumarjadi" target="_blank" rel="noopener">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            LinkedIn
-          </a>
-        </div>
-        <div class="hero-stats">
-          <div class="stat">
-            <span class="stat-number">7+</span>
-            <div class="stat-label">Years Exp</div>
-          </div>
-          <div class="stat">
-            <span class="stat-number">5</span>
-            <div class="stat-label">Projects</div>
-          </div>
-          <div class="stat">
-            <span class="stat-number">Full</span>
-            <div class="stat-label">Stack</div>
-          </div>
+  <main class="container">
+    <header class="header" id="top">
+      <div class="header-content">
+        <div class="profile-photo" role="img" aria-label="Balakumar Swamy Jadi initials">BSJ</div>
+        <h1>Balakumar Swamy Jadi</h1>
+        <div class="title">Senior Full Stack .NET Developer</div>
+        <div class="location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Hyderabad, India</div>
+        <div class="contact-info">
+          <a href="mailto:balakumarjadi@yahoo.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i> balakumarjadi@yahoo.com</a>
+          <a href="tel:+916281355510"><i class="fa-solid fa-phone" aria-hidden="true"></i> +91-6281355510</a>
+          <a href="https://linkedin.com/in/balakumarjadi" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn Profile</a>
+          <a href="https://github.com/balakumar-dev" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub Profile</a>
         </div>
       </div>
-      <div class="hero-badge">
-        <div class="badge-dot"></div>
-        <span class="badge-status">Available</span>
-        <div class="badge-label">Open to new<br>opportunities</div>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <h2 class="section-title">Experience</h2>
-    <div class="exp-list">
+    <nav aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+    </nav>
 
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-period">Jul 2025<br>Present</div>
-          <div class="exp-company">Innova Solutions</div>
-        </div>
-        <div>
-          <div class="exp-role">Senior Full Stack .NET Developer</div>
-          <div class="exp-desc">
-            Working on Tepper, a football intelligence and scouting platform, building microservices with
-            ASP.NET Core Web API and Angular 18. Applying Clean Architecture, Dapper for data access,
-            Azure Service Bus for event-driven workflows, and Azure Functions for serverless processing.
+    <section id="about">
+      <h2 class="section-heading"><i class="fa-regular fa-user" aria-hidden="true"></i> Professional Summary</h2>
+      <p class="summary">
+        Senior Full Stack .NET Developer with <span class="metric">7+ years of experience</span> building and maintaining enterprise web applications using C#, ASP.NET Core, Angular, and Microsoft SQL Server. Experienced in developing RESTful APIs, microservices, and event-driven application workflows using Azure services.
+      </p>
+      <p class="summary">
+        Skilled in Clean Architecture, SOLID principles, Entity Framework Core, Dapper, LINQ, and database development. Currently expanding expertise in Generative AI, LLM integrations, Retrieval-Augmented Generation (RAG), embeddings, vector databases, and Model Context Protocol (MCP).
+      </p>
+    </section>
+
+    <section id="experience">
+      <h2 class="section-heading"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Professional Experience</h2>
+
+      <article class="experience-item">
+        <div class="job-header">
+          <div>
+            <div class="job-title">Senior Full Stack .NET Developer</div>
+            <div class="company">Innova Solutions <span>| Current role</span></div>
           </div>
-          <div class="exp-tags">
-            <span class="tag">C#</span>
-            <span class="tag">ASP.NET Core</span>
-            <span class="tag">Angular 18</span>
-            <span class="tag">Microservices</span>
-            <span class="tag">Azure Service Bus</span>
-            <span class="tag">Azure Functions</span>
-            <span class="tag">Dapper</span>
-            <span class="tag">SQL Server 2019</span>
+          <div class="job-date">Jul 2025 – Present</div>
+        </div>
+        <div class="responsibilities">
+          <p>Working on Tepper, a football intelligence and scouting platform, building application features using ASP.NET Core Web API and Angular 18.</p>
+          <h4><i class="fa-solid fa-code" aria-hidden="true"></i> Application Development & Architecture</h4>
+          <ul>
+            <li>Developing microservices using ASP.NET Core Web API and Angular 18.</li>
+            <li>Applying Clean Architecture and Dapper for data access.</li>
+            <li>Using Azure Service Bus for event-driven workflows and Azure Functions for serverless processing.</li>
+          </ul>
+          <div class="tech"><span class="tech-badge">C#</span><span class="tech-badge">ASP.NET Core</span><span class="tech-badge">Angular 18</span><span class="tech-badge">Microservices</span><span class="tech-badge">Azure Service Bus</span><span class="tech-badge">Azure Functions</span><span class="tech-badge">Dapper</span><span class="tech-badge">SQL Server 2019</span></div>
+        </div>
+      </article>
+
+      <article class="experience-item">
+        <div class="job-header">
+          <div>
+            <div class="job-title">.NET Consultant</div>
+            <div class="company">Grid Dynamics <span>| via E-labs Infotech</span></div>
           </div>
+          <div class="job-date">Feb 2025 – Jul 2025</div>
         </div>
-      </div>
+        <div class="responsibilities">
+          <p>Worked on Topaz, an enterprise vendor consolidation platform designed to unify multiple vendor solutions and improve operational efficiency.</p>
+          <h4><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> Services & Integration</h4>
+          <ul>
+            <li>Worked with ASP.NET Core microservices and Azure Service Bus integration.</li>
+            <li>Used Azure Functions for supporting serverless workflows.</li>
+            <li>Worked with xUnit and SQL Server as part of application development and testing.</li>
+          </ul>
+          <div class="tech"><span class="tech-badge">ASP.NET Core Web API</span><span class="tech-badge">Microservices</span><span class="tech-badge">Azure Service Bus</span><span class="tech-badge">Azure Functions</span><span class="tech-badge">xUnit</span><span class="tech-badge">SQL Server</span></div>
+        </div>
+      </article>
 
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-period">Feb 2025<br>Jul 2025</div>
-          <div class="exp-company">Grid Dynamics<br><small style="color:var(--text-muted)">via E-labs Infotech</small></div>
-        </div>
-        <div>
-          <div class="exp-role">.NET Consultant</div>
-          <div class="exp-desc">
-            Enhanced an enterprise vendor consolidation platform (Topaz) to unify multiple vendor solutions,
-            improving operational efficiency and reducing licensing costs. Managed multiple ASP.NET Core
-            microservices with Azure Service Bus and Functions integration.
+      <article class="experience-item">
+        <div class="job-header">
+          <div>
+            <div class="job-title">.NET Developer (Technical Preparation)</div>
+            <div class="company">Cognizant <span>| via Team Lease</span></div>
           </div>
-          <div class="exp-tags">
-            <span class="tag">ASP.NET Core Web API</span>
-            <span class="tag">Microservices</span>
-            <span class="tag">Azure Service Bus</span>
-            <span class="tag">Azure Functions</span>
-            <span class="tag">xUnit</span>
-            <span class="tag">SQL Server</span>
+          <div class="job-date">Nov 2024 – Feb 2025</div>
+        </div>
+        <div class="responsibilities">
+          <p>Participated in technical preparation and skill enhancement focused on .NET full-stack development, including C#, ASP.NET Core, Angular, and SQL Server, while preparing for client project allocation.</p>
+          <div class="tech"><span class="tech-badge">C#</span><span class="tech-badge">ASP.NET Core</span><span class="tech-badge">Angular</span><span class="tech-badge">SQL Server</span></div>
+        </div>
+      </article>
+
+      <article class="experience-item">
+        <div class="job-header">
+          <div>
+            <div class="job-title">.NET Consultant</div>
+            <div class="company">SAIS IT Services</div>
           </div>
+          <div class="job-date">Apr 2023 – Sep 2024</div>
         </div>
-      </div>
+        <div class="responsibilities">
+          <p>Worked on Formulary Hub, a drug management system with configurable business rules for drug availability, exclusions, age and gender criteria, and quantity limits.</p>
+          <h4><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Full-Stack Development</h4>
+          <ul>
+            <li>Developed application functionality using ASP.NET Core and Entity Framework Core.</li>
+            <li>Worked on the Angular frontend and SQL Server database.</li>
+          </ul>
+          <div class="tech"><span class="tech-badge">ASP.NET Core Web API</span><span class="tech-badge">Entity Framework Core</span><span class="tech-badge">Angular</span><span class="tech-badge">Bootstrap</span><span class="tech-badge">SQL Server 2019</span></div>
+        </div>
+      </article>
 
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-period">Nov 2024<br>Feb 2025</div>
-          <div class="exp-company">Cognizant<br><small style="color:var(--text-muted)">via Team Lease</small></div>
-        </div>
-        <div>
-          <div class="exp-role">.NET Developer (Technical Prep)</div>
-          <div class="exp-desc">
-            Participated in technical preparation and skill enhancement focused on .NET Full Stack
-            development. Reviewed C#, ASP.NET Core, Angular, and SQL Server concepts, preparing for
-            client project allocation.
+      <article class="experience-item">
+        <div class="job-header">
+          <div>
+            <div class="job-title">.NET Developer</div>
+            <div class="company">Betalen Technology</div>
           </div>
-          <div class="exp-tags">
-            <span class="tag">C#</span>
-            <span class="tag">ASP.NET Core</span>
-            <span class="tag">Angular</span>
-            <span class="tag">SQL Server</span>
-          </div>
+          <div class="job-date">Oct 2019 – Apr 2023</div>
         </div>
+        <div class="responsibilities">
+          <p>Worked on ePayments, a payment processing platform, and Logistix-eTickets, a customer service and ticketing application.</p>
+          <h4><i class="fa-solid fa-code" aria-hidden="true"></i> Application Development</h4>
+          <ul>
+            <li>Developed backend APIs and Windows services for background processing.</li>
+            <li>Built frontend features using AngularJS, jQuery, JavaScript, and Bootstrap.</li>
+          </ul>
+          <div class="tech"><span class="tech-badge">ASP.NET Core MVC</span><span class="tech-badge">ASP.NET Core Web API</span><span class="tech-badge">AngularJS</span><span class="tech-badge">JavaScript</span><span class="tech-badge">jQuery</span><span class="tech-badge">SQL Server</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-heading"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> Key Projects</h2>
+      <div class="projects-grid">
+        <article class="project-card">
+          <div><h3><i class="fa-solid fa-futbol" aria-hidden="true"></i> Tepper — Football Intelligence Platform</h3><p>Technology-driven football scouting and decision-making platform supporting analytics and intelligent workflows for teams.</p></div>
+          <div class="tech"><span class="tech-badge">ASP.NET Core</span><span class="tech-badge">Angular 18</span><span class="tech-badge">Azure Service Bus</span><span class="tech-badge">Azure Functions</span><span class="tech-badge">Clean Architecture</span></div>
+          <div class="project-meta"><span>Team: 10 · Agile</span><span>Jul 2025 – Present</span></div>
+        </article>
+        <article class="project-card">
+          <div><h3><i class="fa-solid fa-building" aria-hidden="true"></i> Topaz — Enterprise Vendor Consolidation</h3><p>Enterprise platform consolidating multiple vendor solutions to improve operational efficiency and reduce licensing costs.</p></div>
+          <div class="tech"><span class="tech-badge">ASP.NET Core Web API</span><span class="tech-badge">Microservices</span><span class="tech-badge">Azure Service Bus</span><span class="tech-badge">Azure Functions</span><span class="tech-badge">xUnit</span></div>
+          <div class="project-meta"><span>Team: 15 · Agile</span><span>Feb – Jul 2025</span></div>
+        </article>
+        <article class="project-card">
+          <div><h3><i class="fa-solid fa-prescription-bottle-medical" aria-hidden="true"></i> Formulary Hub — Drug Management System</h3><p>Configurable drug availability management with rules covering exclusions, preferences, age and gender criteria, and quantity limits.</p></div>
+          <div class="tech"><span class="tech-badge">ASP.NET Core</span><span class="tech-badge">EF Core</span><span class="tech-badge">Angular</span><span class="tech-badge">Bootstrap</span><span class="tech-badge">SQL Server 2019</span></div>
+          <div class="project-meta"><span>Team: 10 · Agile</span><span>Apr 2023 – Sep 2024</span></div>
+        </article>
+        <article class="project-card">
+          <div><h3><i class="fa-solid fa-money-bill-transfer" aria-hidden="true"></i> ePayments — Payment Processing</h3><p>Payment payout platform with a transaction dashboard, Windows background service processing, and integration supporting the end-to-end payment flow.</p></div>
+          <div class="tech"><span class="tech-badge">ASP.NET Core</span><span class="tech-badge">AngularJS</span><span class="tech-badge">JavaScript</span><span class="tech-badge">jQuery</span><span class="tech-badge">SQL Server</span></div>
+          <div class="project-meta"><span>Team: 5 · Agile</span><span>Apr 2021 – Apr 2023</span></div>
+        </article>
+        <article class="project-card">
+          <div><h3><i class="fa-solid fa-ticket" aria-hidden="true"></i> Logistix-eTickets — Customer Service</h3><p>Customer service application for payment failures, deposits, refunds, support tickets, live chat, and ticket history workflows.</p></div>
+          <div class="tech"><span class="tech-badge">ASP.NET Core MVC</span><span class="tech-badge">ASP.NET Core Web API</span><span class="tech-badge">AngularJS</span><span class="tech-badge">Bootstrap</span><span class="tech-badge">SQL Server</span></div>
+          <div class="project-meta"><span>Team: 5 · Agile</span><span>Oct 2019 – Mar 2021</span></div>
+        </article>
       </div>
+    </section>
 
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-period">Apr 2023<br>Sep 2024</div>
-          <div class="exp-company">SAIS IT Services</div>
-        </div>
-        <div>
-          <div class="exp-role">.NET Consultant</div>
-          <div class="exp-desc">
-            Built Formulary Hub, a drug management system with configurable business rules controlling
-            drug availability, exclusions, age/gender criteria, and quantity limits. Full stack using
-            ASP.NET Core, Entity Framework Core, and Angular.
-          </div>
-          <div class="exp-tags">
-            <span class="tag">ASP.NET Core Web API</span>
-            <span class="tag">Entity Framework Core</span>
-            <span class="tag">Angular</span>
-            <span class="tag">Bootstrap</span>
-            <span class="tag">SQL Server 2019</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-meta">
-          <div class="exp-period">Oct 2019<br>Apr 2023</div>
-          <div class="exp-company">Betalen Technology</div>
-        </div>
-        <div>
-          <div class="exp-role">.NET Developer</div>
-          <div class="exp-desc">
-            Developed ePayments (a payment processing platform) and Logistix-eTickets (a customer
-            service and ticketing application). Built backend APIs, Windows services for background
-            processing, and frontend features using AngularJS, jQuery, and Bootstrap.
-          </div>
-          <div class="exp-tags">
-            <span class="tag">ASP.NET Core MVC</span>
-            <span class="tag">ASP.NET Core Web API</span>
-            <span class="tag">AngularJS</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">jQuery</span>
-            <span class="tag">SQL Server</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <h2 class="section-title">Projects</h2>
-    <div class="projects-grid">
-
-      <div class="project-card">
-        <div class="project-num">Project #5 · Current</div>
-        <div class="project-name">Tepper — Football Intelligence Platform</div>
-        <div class="project-desc">
-          Technology-driven football scouting and decision-making platform. Analytics and intelligent workflows for teams to improve scouting effectiveness and performance.
-        </div>
-        <div class="project-tags">
-          <span class="tag">ASP.NET Core</span>
-          <span class="tag">Angular 18</span>
-          <span class="tag">Azure Service Bus</span>
-          <span class="tag">Azure Functions</span>
-          <span class="tag">Clean Architecture</span>
-        </div>
-        <div class="project-meta">
-          <span>Team: 10 · Agile</span>
-          <span>Jul 2025 – Present</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-num">Project #4</div>
-        <div class="project-name">Topaz — Enterprise Vendor Consolidation</div>
-        <div class="project-desc">
-          Consolidated multiple vendor solutions into a single enterprise platform to improve operational efficiency and reduce licensing costs across the organization.
-        </div>
-        <div class="project-tags">
-          <span class="tag">ASP.NET Core Web API</span>
-          <span class="tag">Microservices</span>
-          <span class="tag">Azure Service Bus</span>
-          <span class="tag">Azure Functions</span>
-          <span class="tag">xUnit</span>
-        </div>
-        <div class="project-meta">
-          <span>Team: 15 · Agile</span>
-          <span>Feb – Jul 2025</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-num">Project #3</div>
-        <div class="project-name">Formulary Hub — Drug Management System</div>
-        <div class="project-desc">
-          Configurable drug availability management with business rules covering exclusions, preferences, age/gender criteria, and quantity limits for healthcare providers.
-        </div>
-        <div class="project-tags">
-          <span class="tag">ASP.NET Core</span>
-          <span class="tag">EF Core</span>
-          <span class="tag">Angular</span>
-          <span class="tag">Bootstrap</span>
-          <span class="tag">SQL Server 2019</span>
-        </div>
-        <div class="project-meta">
-          <span>Team: 10 · Agile</span>
-          <span>Apr 2023 – Sep 2024</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-num">Project #2</div>
-        <div class="project-name">ePayments — Payment Processing Application</div>
-        <div class="project-desc">
-          Payment payout platform with real-time transaction dashboard, Windows background service processing every 5 minutes, and integration with Design application for end-to-end payment flow.
-        </div>
-        <div class="project-tags">
-          <span class="tag">ASP.NET Core</span>
-          <span class="tag">AngularJS</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">jQuery</span>
-          <span class="tag">SQL Server</span>
-        </div>
-        <div class="project-meta">
-          <span>Team: 5 · Agile</span>
-          <span>Apr 2021 – Apr 2023</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-num">Project #1</div>
-        <div class="project-name">Logistix-eTickets — Customer Service Platform</div>
-        <div class="project-desc">
-          Customer service application handling payment failures, deposits, refunds, support tickets, live chat, and full ticket history with structured workflows.
-        </div>
-        <div class="project-tags">
-          <span class="tag">ASP.NET Core MVC</span>
-          <span class="tag">ASP.NET Core Web API</span>
-          <span class="tag">AngularJS</span>
-          <span class="tag">Bootstrap</span>
-          <span class="tag">SQL Server</span>
-        </div>
-        <div class="project-meta">
-          <span>Team: 5 · Agile</span>
-          <span>Oct 2019 – Mar 2021</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <h2 class="section-title">Skills</h2>
-
-    <div class="ai-banner" style="margin-bottom:24px;">
-      <div class="ai-icon">🤖</div>
-      <div>
-        <div class="ai-title">AI &amp; Generative AI</div>
+    <section id="skills">
+      <h2 class="section-heading"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Technical Skills</h2>
+      <div class="ai-panel">
+        <h3><i class="fa-solid fa-robot" aria-hidden="true"></i> AI &amp; Generative AI</h3>
         <div class="ai-tags">
-          <span class="ai-tag">Cursor</span>
-          <span class="ai-tag">GitHub Copilot</span>
-          <span class="ai-tag">Claude</span>
-          <span class="ai-tag">OpenAI API</span>
-          <span class="ai-tag">Claude API</span>
-          <span class="ai-tag">Prompt Engineering</span>
-          <span class="ai-tag">RAG</span>
-          <span class="ai-tag">Embeddings</span>
-          <span class="ai-tag">Vector Databases</span>
-          <span class="ai-tag">MCP</span>
-          <span class="ai-tag">Semantic Search</span>
+          <span class="ai-tag">Cursor</span><span class="ai-tag">GitHub Copilot</span><span class="ai-tag">Claude</span><span class="ai-tag">OpenAI API</span><span class="ai-tag">Claude API</span><span class="ai-tag">Prompt Engineering</span><span class="ai-tag">RAG</span><span class="ai-tag">Embeddings</span><span class="ai-tag">Vector Databases</span><span class="ai-tag">MCP</span><span class="ai-tag">Semantic Search</span>
         </div>
       </div>
-    </div>
+      <div class="skills-grid">
+        <div class="skill-category"><h3><i class="fa-solid fa-code"></i> Languages</h3><ul class="skill-list"><li>C#</li><li>TypeScript</li><li>SQL</li><li>JavaScript</li></ul></div>
+        <div class="skill-category"><h3><i class="fa-brands fa-microsoft"></i> Microsoft .NET</h3><ul class="skill-list"><li>.NET</li><li>ASP.NET Core</li><li>Web API</li><li>MVC</li><li>ADO.NET</li><li>LINQ</li></ul></div>
+        <div class="skill-category"><h3><i class="fa-solid fa-display"></i> Frontend</h3><ul class="skill-list"><li>Angular</li><li>AngularJS</li><li>TypeScript</li><li>jQuery</li><li>HTML5</li><li>CSS3</li><li>Bootstrap</li><li>Material UI</li></ul></div>
+        <div class="skill-category"><h3><i class="fa-solid fa-database"></i> ORM &amp; Data Access</h3><ul class="skill-list"><li>Dapper</li><li>EF Core</li><li>EF Core Power Tools</li><li>Elasticsearch</li></ul></div>
+        <div class="skill-category"><h3><i class="fa-solid fa-server"></i> Databases</h3><ul class="skill-list"><li>SQL Server</li><li>PostgreSQL</li><li>T-SQL</li><li>Stored Procedures</li><li>Query Optimization</li></ul></div>
+        <div class="skill-category"><h3><i class="fa-solid fa-sitemap"></i> Architecture</h3><ul class="skill-list"><li>Microservices</li><li>Clean Architecture</li><li>RESTful APIs</li><li>SOLID</li><li>RabbitMQ</li><li>Azure Service Bus</li><li>Event-Driven</li></ul></div>
+        <div class="skill-category"><h3><i class="fa-brands fa-microsoft"></i> Azure</h3><ul class="skill-list"><li>Azure Functions</li><li>Azure DevOps</li><li>App Service</li><li>Azure SQL</li><li>Blob Storage</li><li>Key Vault</li><li>Application Insights</li><li>API Management</li></ul></div>
+        <div class="skill-category"><h3><i class="fa-solid fa-gears"></i> DevOps &amp; Tools</h3><ul class="skill-list"><li>Docker</li><li>Kubernetes</li><li>CI/CD</li><li>Git</li><li>TFS/VSTS</li><li>Swagger</li><li>Postman</li><li>xUnit</li></ul></div>
+      </div>
+    </section>
 
-    <div class="skills-grid">
-      <div class="skill-group">
-        <div class="skill-group-title">Languages</div>
-        <div class="skill-tags">
-          <span class="skill-tag">C#</span>
-          <span class="skill-tag">TypeScript</span>
-          <span class="skill-tag">SQL</span>
-          <span class="skill-tag">JavaScript</span>
+    <section id="education">
+      <h2 class="section-heading"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Education</h2>
+      <div class="education-item">
+        <div>
+          <h3>B.Tech — Electronics &amp; Communication Engineering</h3>
+          <div class="details">JNTU University, Hyderabad</div>
+          <div class="details"><strong>Graduated:</strong> 2013</div>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Microsoft .NET</div>
-        <div class="skill-tags">
-          <span class="skill-tag">.NET</span>
-          <span class="skill-tag">ASP.NET Core</span>
-          <span class="skill-tag">Web API</span>
-          <span class="skill-tag">MVC</span>
-          <span class="skill-tag">ADO.NET</span>
-          <span class="skill-tag">LINQ</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Frontend</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Angular</span>
-          <span class="skill-tag">AngularJS</span>
-          <span class="skill-tag">TypeScript</span>
-          <span class="skill-tag">jQuery</span>
-          <span class="skill-tag">HTML5</span>
-          <span class="skill-tag">CSS3</span>
-          <span class="skill-tag">Bootstrap</span>
-          <span class="skill-tag">Material UI</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">ORM / Data Access</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Dapper</span>
-          <span class="skill-tag">EF Core</span>
-          <span class="skill-tag">EF Core Power Tools</span>
-          <span class="skill-tag">Elasticsearch</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Databases</div>
-        <div class="skill-tags">
-          <span class="skill-tag">SQL Server</span>
-          <span class="skill-tag">PostgreSQL</span>
-          <span class="skill-tag">T-SQL</span>
-          <span class="skill-tag">Stored Procedures</span>
-          <span class="skill-tag">Query Optimization</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Architecture</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Microservices</span>
-          <span class="skill-tag">Clean Architecture</span>
-          <span class="skill-tag">RESTful APIs</span>
-          <span class="skill-tag">SOLID</span>
-          <span class="skill-tag">RabbitMQ</span>
-          <span class="skill-tag">Service Bus</span>
-          <span class="skill-tag">Event-Driven</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Azure</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Azure Functions</span>
-          <span class="skill-tag">Azure DevOps</span>
-          <span class="skill-tag">App Service</span>
-          <span class="skill-tag">Azure SQL</span>
-          <span class="skill-tag">Blob Storage</span>
-          <span class="skill-tag">Key Vault</span>
-          <span class="skill-tag">App Insights</span>
-          <span class="skill-tag">Service Bus</span>
-          <span class="skill-tag">API Management</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title">DevOps &amp; Tools</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Docker</span>
-          <span class="skill-tag">Kubernetes</span>
-          <span class="skill-tag">CI/CD</span>
-          <span class="skill-tag">Git</span>
-          <span class="skill-tag">TFS/VSTS</span>
-          <span class="skill-tag">Swagger</span>
-          <span class="skill-tag">Postman</span>
-          <span class="skill-tag">xUnit</span>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- EDUCATION -->
-  <section id="education">
-    <h2 class="section-title">Education</h2>
-    <div class="edu-card">
-      <div>
-        <div class="edu-degree">B.Tech — Electronics &amp; Communication Engineering</div>
-        <div class="edu-college">JNTU University, Hyderabad</div>
-        <div class="edu-year">Graduated 2013</div>
+    <footer>
+      <div class="social-links">
+        <a href="https://linkedin.com/in/balakumarjadi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/balakumar-dev" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:balakumarjadi@yahoo.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
       </div>
-      <div>
-        <div class="edu-cgpa">ECE<span>JNTU · 2013</span></div>
-      </div>
-    </div>
-  </section>
-
-</div><!-- /page -->
-
-<footer>
-  <p>© 2026 Balakumar Swamy Jadi &nbsp;·&nbsp; Senior Full Stack .NET Developer &nbsp;·&nbsp; Hyderabad, India</p>
-  <p style="margin-top:6px;"><a href="mailto:balakumarjadi@yahoo.com">balakumarjadi@yahoo.com</a> &nbsp;·&nbsp; <a href="https://linkedin.com/in/balakumarjadi" target="_blank">linkedin.com/in/balakumarjadi</a></p>
-</footer>
-
+      <p>&copy; 2026 Balakumar Swamy Jadi · Senior Full Stack .NET Developer · Hyderabad, India</p>
+      <p style="margin-top:5px"><a href="mailto:balakumarjadi@yahoo.com">balakumarjadi@yahoo.com</a> · <a href="https://linkedin.com/in/balakumarjadi" target="_blank" rel="noopener noreferrer">linkedin.com/in/balakumarjadi</a></p>
+    </footer>
+  </main>
 </body>
 </html>
