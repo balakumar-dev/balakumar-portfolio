@@ -6,6 +6,7 @@
   <meta name="description" content="Balakumar Swamy Jadi — Senior Full Stack .NET Developer specializing in C#, ASP.NET Core, Angular, Azure and microservices.">
   <meta name="theme-color" content="#1e3a8a">
   <title>Balakumar Swamy Jadi | Senior Full Stack .NET Developer</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -209,23 +210,67 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition-duration: .01ms !important; }
     }
+      /* Hero profile image */
+      .hero-image {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+
+          .hero-image img {
+              width: 130px;
+              height: 130px;
+              object-fit: cover;
+              object-position: center;
+              border-radius: 50%;
+              border: 6px solid #dbeafe;
+              box-shadow: 0 10px 35px rgba(37, 99, 235, 0.18);
+              transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+
+              .hero-image img:hover {
+                  transform: scale(1.04);
+                  box-shadow: 0 15px 40px rgba(37, 99, 235, 0.25);
+              }
+
+      /* Tablet */
+      @media (max-width: 992px) {
+          .hero-image img {
+              width: 230px;
+              height: 230px;
+          }
+      }
+
+      /* Mobile */
+      @media (max-width: 576px) {
+          .hero-image img {
+              width: 190px;
+              height: 190px;
+              border-width: 4px;
+          }
+      }
   </style>
 </head>
 <body>
   <main class="container">
     <header class="header" id="top">
-      <div class="header-content">
-        <div class="profile-photo" role="img" aria-label="Balakumar Swamy Jadi initials">BSJ</div>
-        <h1>Balakumar Swamy Jadi</h1>
-        <div class="title">Senior Full Stack .NET Developer</div>
-        <div class="location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Hyderabad, India</div>
-        <div class="contact-info">
-          <a href="mailto:balakumarjadi@yahoo.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i> balakumarjadi@yahoo.com</a>
-          <a href="tel:+916281355510"><i class="fa-solid fa-phone" aria-hidden="true"></i> +91-6281355510</a>
-          <a href="https://linkedin.com/in/balakumarjadi" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn Profile</a>
-          <a href="https://github.com/balakumar-dev" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub Profile</a>
+        <div class="header-content">
+            <!--<div class="profile-photo" role="img" aria-label="Balakumar Swamy Jadi initials">BSJ</div>-->
+            <div class="hero-image">
+                <img src="passphotonew.jpeg"
+                     alt="Balakumar - Senior .NET Full Stack Developer">
+            </div>
+            <h1>Balakumar Swamy Jadi</h1>
+
+            <div class="title">Senior Full Stack .NET Developer</div>
+            <div class="location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Hyderabad, India</div>
+            <div class="contact-info">
+                <a href="mailto:balakumarjadi@yahoo.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i> balakumarjadi@yahoo.com</a>
+                <a href="tel:+916281355510"><i class="fa-solid fa-phone" aria-hidden="true"></i> +91-6281355510</a>
+                <a href="https://linkedin.com/in/balakumarjadi" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn Profile</a>
+                <a href="https://github.com/balakumar-dev" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub Profile</a>
+            </div>
         </div>
-      </div>
     </header>
 
     <nav aria-label="Main navigation">
